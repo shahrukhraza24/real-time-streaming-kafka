@@ -1,0 +1,9 @@
+zookeeper-server-start.sh config/zookeeper.properties
+kafka-server-start.sh config/server.properties
+
+kafka-topics.sh --create --topic stock_prices --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+python kafka_producer.py
+
+spark-submit --packages org.postgresql:postgresql-42.2.20.jar spark_consumer.py
+
